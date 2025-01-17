@@ -1,11 +1,11 @@
-
+#imports
 import math
 import numpy as np
 from rsoccer_gym.Entities import Robot
 from utils.Point import Point
 from utils.Geometry import Geometry
 
-
+#constantes que vão ser usadas
 PROP_VELOCITY_MIN_FACTOR: float = 0.1
 MAX_VELOCITY: float = 1.5
 ANGLE_EPSILON: float = 0.1
@@ -18,20 +18,24 @@ M_TO_MM: float = 1000.0
 
 class Navigation:
 
+  #conversor de graus pra graus radianos
   @staticmethod
   def degrees_to_radians(degrees):
     return degrees * (math.pi / 180.0)
   
+  #conversor de graus radianos pra graus 
   @staticmethod
   def radians_to_degrees(radians):
     return radians * (180.0 / math.pi)
   
+  #bulletpoint(tentar entender oque é esse point e ter 100% de certeza doq faz)(acho que velocidade do robo)
   @staticmethod
   def global_to_local_velocity(vx, vy, theta):
     vx_local = vx * math.cos(theta) + vy * math.sin(theta)
     vy_local = -vx * math.sin(theta) + vy * math.cos(theta)
     return Point(vx_local, vy_local)
 
+  #bulletpoint(tentar entender oque o return vazio faz e ter 100% de certeza doq faz)(acho que lugar no mapa)
   @staticmethod
   def map_value(value, lLower, lHigher, rLower, rHigher):
     if (lHigher - lLower) == 0:
@@ -39,6 +43,7 @@ class Navigation:
     
     return ((value - lLower) * (rHigher - rLower) / (lHigher - lLower) + rLower)
 
+  #bulletpoint(acho que isso é oque faz o robo se mexer)
   @staticmethod
   def goToPoint(robot: Robot, target: Point):
     target = Point(target.x * M_TO_MM, target.y * M_TO_MM)
