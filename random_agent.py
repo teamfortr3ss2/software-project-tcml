@@ -4,6 +4,7 @@ from utils.Point import Point
 from utils.ssl.base_agent import BaseAgent
 import random
 
+#diferença entre random agent e agent.py é o multiplicador de velocidade
 class RandomAgent(BaseAgent):
     def __init__(self, id=0, yellow=False, vel_mult=0.3):
         super().__init__(id, yellow)
@@ -23,4 +24,5 @@ class RandomAgent(BaseAgent):
         return
 
     def post_decision(self):
+        #perguntar sobre o que isso faz
         pass
